@@ -1,29 +1,18 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const videosRoute = require("./routes/videos");
 const app = express();
+const { PORT } = process.env;
 
-app.use(cor);
+//Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.static("images"));
-app.use("/videos", Routes);
 
-// GET endpoint to retrieve all videos
-app.get("/videos", (req, res) => {
-  res.json(videos);
-});
+//Use the videosRout for handling video-related routes
+app.use("/videos", videosRoute);
 
-//GET endpoint to retrieve all videos
-app.get("/videos/:id", (req, res) => {
-  res.send(videos);
-});
-
-//POST endpoint to add a new video
-app.post("/videos", (req, res) => {
-  res.send("You hit th post endpoint!");
-});
-
-const PORT = 8080;
-
-app.listen(8080, () => {
-  console.log("Pulled the rip cord, the server has started on port 8080");
+app.listen(PORT, () => {
+  console.log(`The server has started on ${PORT}`);
 });
